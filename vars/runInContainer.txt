@@ -1,0 +1,41 @@
+Run a code block (passed as a closure) in a container.
+
+<hr>
+<br>
+
+<strong>Example Pipeline:</strong>
+
+<pre>
+  <code>
+    pipeline {
+      agent { label 'jenkins-agent-base' }
+      stage('Test') {
+        steps {
+          runInContainer(project: 'openshift', imagestream: 'jenkins-agent-nodejs', tag: 'latest', isJenkinsAgent: true) {
+            // These steps are executed in the openshift/jenkins-agent-nodejs:latest image
+            sh 'node --version'
+            sh 'npm --version'
+          }
+        }
+      }
+    }
+  </code>
+</pre>
+
+<strong>Using a docker image from outside the integrated openshift container registry:</strong>
+
+<pre>
+  <code>
+    pipeline {
+      agent { label 'jenkins-agent-base' }
+      stage('Test') {
+        steps {
+          runInContainer(image: 'registry.access.redhat.com/rhscl/postgresql-96-rhel7', tag: 'latest') {
+            // These steps are executed in the registry.access.redhat.com/rhscl/postgresql-96-rhel7:latest image
+            sh 'psql --version'
+          }
+        }
+      }
+    }
+  </code>
+</pre>

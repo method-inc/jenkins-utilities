@@ -1,0 +1,1 @@
+Check if the current branch is one of master, develop, or release/*

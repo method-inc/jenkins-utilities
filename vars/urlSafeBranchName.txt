@@ -1,0 +1,1 @@
+Convert the current branch name to a url safe string

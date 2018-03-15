@@ -1,0 +1,2 @@
+Convert the input string to a url safe string.
+Replaces all special characters with "-" and converts uppercase characters to lowercase.

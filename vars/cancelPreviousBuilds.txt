@@ -1,0 +1,1 @@
+Cancel all previous builds for the same branch or pull request that are still in progress
