@@ -2,7 +2,7 @@
 
 def call(Map config, Closure body) {
   String cloud = config.getOrDefault('cloud', 'kubernetes')
-  String project = config.getOrDefault('project', 'kubernetes')
+  String project = config.getOrDefault('project', 'openshift')
   String tag = config.getOrDefault('tag', 'latest')
 
   boolean isJenkinsAgent = config.getOrDefault('isJenkinsAgent', false)
