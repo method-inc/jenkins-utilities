@@ -1,0 +1,25 @@
+Run docker commands in a dind (docker-in-docker) container on kubernetes. Supports multi-stage builds.
+
+<hr>
+<br>
+
+<strong>Example Pipeline:</strong>
+
+<pre>
+  <code>
+    pipeline {
+      agent { label 'jenkins-agent-base' }
+      stage('Build') {
+        steps {
+          stash includes: '**/*', name: 'project'
+          withDocker() {
+            // These steps are executed in the docker/18.04 image
+            unstash 'project'
+            sh 'docker --version'
+            sh 'docker build .'
+          }
+        }
+      }
+    }
+  </code>
+</pre>
