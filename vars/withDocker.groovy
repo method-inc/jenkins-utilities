@@ -13,7 +13,7 @@ def call(Map config, Closure body) {
   podTemplate (
     label: podLabel,
     cloud: cloud,
-    containers: containers: [
+    containers: [
       containerTemplate(
         name: dockerCommandsContainerName,
         image: "${dockerImage}:${dockerTag}",
