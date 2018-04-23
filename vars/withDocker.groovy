@@ -6,6 +6,8 @@ def call(Map config, Closure body) {
   String dockerTag = config.getOrDefault('dockerTag', '18.04')
   String dindImage = config.getOrDefault('dindImage', 'docker')
   String dindTag = config.getOrDefault('dindTag', '18.04-dind')
+  String cpuLimit = config.getOrDefault('cpuLimit', '100m')
+  String memLimit = config.getOrDefault('memLimit', '512Mi')
 
   String podLabel = 'docker-in-docker'
   String dockerCommandsContainerName = 'docker-cmds'
@@ -21,9 +23,9 @@ def call(Map config, Closure body) {
         command: 'docker run -p 80:80 httpd:latest',
         envVars: [ envVar(key: 'DOCKER_HOST', value: 'tcp://localhost:2375') ],
         resourceRequestCpu: '10m',
-        resourceLimitCpu: '100m',
+        resourceLimitCpu: cpuLimit,
         resourceRequestMemory: '256Mi',
-        resourceLimitMemory: '512Mi'
+        resourceLimitMemory: memLimit
       ),
       containerTemplate(
         name: 'dind-daemon',
