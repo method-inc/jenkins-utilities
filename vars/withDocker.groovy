@@ -9,6 +9,7 @@ def call(Map config, Closure body) {
   String cpuLimit = config.getOrDefault('cpuLimit', '100m')
   String memLimit = config.getOrDefault('memLimit', '512Mi')
 
+
   String podLabel = 'docker-in-docker'
   String dockerCommandsContainerName = 'docker-cmds'
 
