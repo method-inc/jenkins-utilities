@@ -23,9 +23,9 @@ def call(Map config, Closure body) {
         command: 'docker run -p 80:80 httpd:latest',
         envVars: [ envVar(key: 'DOCKER_HOST', value: 'tcp://localhost:2375') ],
         resourceRequestCpu: '10m',
-        resourceLimitCpu: cpuLimit,
+        resourceLimitCpu: '100m',
         resourceRequestMemory: '256Mi',
-        resourceLimitMemory: memLimit
+        resourceLimitMemory: '512Mi'
       ),
       containerTemplate(
         name: 'dind-daemon',
@@ -33,9 +33,9 @@ def call(Map config, Closure body) {
         ttyEnabled: true,
         privileged: true,
         resourceRequestCpu: '20m',
-        resourceLimitCpu: '100m',
+        resourceLimitCpu: cpuLimit,
         resourceRequestMemory: '512Mi',
-        resourceLimitMemory: '512Mi'
+        resourceLimitMemory: memLimit
       )
     ],
     volumes: [ emptyDirVolume(mountPath: '/var/lib/docker', memory: false) ]
