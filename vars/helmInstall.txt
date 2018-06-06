@@ -1,0 +1,36 @@
+Install a helm chart.
+
+<hr>
+<br>
+
+<strong>Example Pipeline:</strong>
+
+<pre>
+  <code>
+    // ./Jenkinsfile
+    pipeline {
+      agent { label 'default' }
+      stage('Install') {
+        steps {
+          helmInstall name: 'jenkins', // the helm release name
+                      namespace: 'myapp-build', // the namespace in which to install the release
+                      chart: 'stable/jenkins', // helm chart to install
+                      version: '0.16.1', // helm chart version
+                      values: 'overrides.yaml', // path to values override file
+                      args: ["--set rbac.serviceAccountName=jenkins"] // additional helm arguments
+        }
+      }
+    }
+  </code>
+</pre>
+
+<br>
+
+<pre>
+  <code>
+    # ./overrides.yaml
+    Master:
+      Image: quay.io/jlegrone/jenkins
+      ImageTag: latest
+  </code>
+</pre>
