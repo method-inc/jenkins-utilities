@@ -1,18 +1,15 @@
 #!/usr/bin/env groovy
 
 def call() {
-  def jobname = env.JOB_NAME
-  def buildnum = env.BUILD_NUMBER.toInteger()
+  String jobname = env.JOB_NAME
+  int currentBuildNum = env.BUILD_NUMBER.toInteger()
 
   def job = Jenkins.instance.getItemByFullName(jobname)
   for (build in job.builds) {
-    if (!build.isBuilding()) {
-      continue;
+    // Only cancel builds that are ongoing and older than the current build
+    if (build.isBuilding() && currentBuildNum > build.getNumber().toInteger()) {
+      build.doStop();
+      echo "Build ${build.toString()} cancelled"
     }
-    if (buildnum == build.getNumber().toInteger()) {
-      continue;
-    }
-    build.doStop();
-    echo "Build ${build.toString()} cancelled"
   }
 }

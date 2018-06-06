@@ -1,0 +1,45 @@
+Build an ImageStream in OpenShift.
+
+<p>
+The <code>buildImageStream</code> function defines a Jenkins declarative
+pipeline internally, and therefore cannot be called from within another
+declarative pipeline. Instead it should be called at the top level of
+your <code>Jenkinsfile</code> as shown in the example below.
+</p>
+
+<hr>
+<br>
+
+<strong>Example Pipeline:</strong>
+
+<pre>
+  <code>
+    # build-imagestream.yaml
+    source:
+      imagestream:
+        name: jenkins-agent-base
+        tag: latest
+        namespace: openshift
+    ## Test image before pushing to registry
+    ## Reference: https://docs.openshift.com/container-platform/3.9/dev_guide/builds/build_hooks.html#configuring-post-commit-build-hooks
+    postCommit:
+      script: |-
+        git --version &&
+        npm --version &&
+        node --version &&
+        oc version &&
+        helm version --client
+  </code>
+</pre>
+
+<pre>
+  <code>
+    // Jenkinsfile
+    library 'pipeline-utilities'
+
+    buildImageStream(imagestream: 'jenkins-agent-nodejs', isJenkinsAgent: true, test: {
+      sh 'node --version'
+      sh 'npm --version'
+    })
+  </code>
+</pre>
