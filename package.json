@@ -1,0 +1,45 @@
+{
+  "name": "@skookum/jenkins-utilities",
+  "private": true,
+  "version": "0.1.0",
+  "description": "This repository is a shared library of utilities to be used in Jenkins pipelines.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "git-cz",
+    "commit:retry": "git-cz --retry",
+    "commitmsg": "commitlint -E GIT_PARAMS"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Skookum/jenkins-utilities.git"
+  },
+  "author": "Jacob LeGrone <git@jacob.work> (https://jacoblegrone.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Skookum/jenkins-utilities/issues"
+  },
+  "homepage": "https://github.com/Skookum/jenkins-utilities#readme",
+  "config": {
+    "commitizen": {
+      "path": "node_modules/@commitlint/prompt"
+    }
+  },
+  "release": {
+    "verifyConditions": [
+      "@semantic-release/github"
+    ],
+    "publish": [
+      "@semantic-release/github"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.1",
+    "@commitlint/prompt": "^7.0.0",
+    "@commitlint/travis-cli": "^7.0.0",
+    "commitizen": "^2.10.1",
+    "husky": "^0.14.3",
+    "semantic-release": "^15.5.1"
+  }
+}
