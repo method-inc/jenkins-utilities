@@ -22,7 +22,10 @@
   "homepage": "https://github.com/Skookum/jenkins-utilities#readme",
   "config": {
     "commitizen": {
-      "path": "node_modules/@commitlint/prompt"
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "commitizen.config.js"
     }
   },
   "release": {
@@ -39,6 +42,7 @@
     "@commitlint/prompt": "^7.0.0",
     "@commitlint/travis-cli": "^7.0.0",
     "commitizen": "^2.10.1",
+    "cz-customizable": "^5.2.0",
     "husky": "^0.14.3",
     "semantic-release": "^15.5.1"
   }

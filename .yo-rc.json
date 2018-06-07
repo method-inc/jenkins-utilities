@@ -1,7 +1,7 @@
 {
   "generator-semantic-module": {
     "packager": "yarn",
-    "commitizen-adapter": "@commitlint/prompt",
+    "commitizen-adapter": "cz-customizable",
     "commitlint-config": "@commitlint/config-conventional"
   }
 }
